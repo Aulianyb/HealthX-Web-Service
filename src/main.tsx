@@ -11,6 +11,7 @@ import DataStaffPage from "./pages/AdminPage/DataStaffPage/DataStaffPage";
 import DataRuanganPage from "./pages/AdminPage/DataRuanganPage/DataRuanganPage";
 import DataPasienPage from "./pages/AdminPage/DataPasienPage/DataPasienPage";
 import DataLayananPage from "./pages/AdminPage/DataLayananPage/DataLayananPage";
+import APITesting from "./pages/Testing/APITesting";
 import "./index.css";
 
 const rootElement = document.getElementById("root");
@@ -28,6 +29,8 @@ ReactDOM.createRoot(rootElement).render(
         <Route path="/admin/data-ruangan" element={<DataRuanganPage />} />
         <Route path="/admin/data-pasien" element={<DataPasienPage />} />
         <Route path="/admin/data-layanan" element={<DataLayananPage />} />
+
+        <Route path="/debug" element={<APITesting />} />
       </Routes>
     </Router>
   </React.StrictMode>
