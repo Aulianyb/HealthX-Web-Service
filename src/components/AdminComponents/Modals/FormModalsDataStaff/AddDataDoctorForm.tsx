@@ -22,6 +22,7 @@ const AddDataDoctorForm: React.FC<AddDataDoctorFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(name, telephone, gender, department, shiftDay, shiftHours);
     const { error } = await supabase.from("Doctor").insert([
       {
         name,
