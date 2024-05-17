@@ -64,7 +64,7 @@ const AddDataStaffForm: React.FC<AddDataRuanganProps> = ({
                 placeholder={label}
               />
               <label
-                className={`absolute top-4 left-4 font-semibold text-black transition-all transform ${
+                className={`absolute top-2 left-4 font-semibold text-black transition-all transform ${
                   value && "text-xs top-1"
                 }`}
               >

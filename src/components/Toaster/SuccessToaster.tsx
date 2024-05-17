@@ -1,3 +1,4 @@
+//SuccessToaster.tsx
 import React from "react";
 import { Toast } from "flowbite-react";
 import { HiCheck } from "react-icons/hi";

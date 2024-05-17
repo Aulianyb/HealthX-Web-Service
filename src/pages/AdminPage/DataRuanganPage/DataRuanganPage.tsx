@@ -22,7 +22,7 @@ const DataRuanganPage = () => {
     <div>
       <NavBar />
       <div className="flex items-center justify-between mx-20 mt-12">
-        <h1 className="text-5xl font-semibold text-center ">Data Staff</h1>
+        <h1 className="text-5xl font-semibold text-center ">Data Ruangan</h1>
         <div className="flex flex-row items-center justify-center">
           <button
             onClick={handleAddButtonClick}

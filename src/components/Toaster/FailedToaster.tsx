@@ -1,3 +1,4 @@
+//FailedToaster.tsx
 import React from "react";
 import { Toast } from "flowbite-react";
 import { HiExclamation } from "react-icons/hi";

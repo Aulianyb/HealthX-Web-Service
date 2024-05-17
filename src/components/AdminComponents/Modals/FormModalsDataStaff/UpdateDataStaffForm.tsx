@@ -91,7 +91,7 @@ const UpdateDataStaffForm: React.FC<UpdateDataStaffFormProps> = ({
                 placeholder={label}
               />
               <label
-                className={`absolute top-4 left-4 text-black transition-all transform font-semibold ${
+                className={`absolute top-2 left-4 text-black transition-all transform font-semibold ${
                   value && "text-xs top-1"
                 }`}
               >
@@ -136,7 +136,7 @@ const UpdateDataStaffForm: React.FC<UpdateDataStaffFormProps> = ({
                 placeholder={label}
               />
               <label
-                className={`absolute top-4 left-4 text-black font-semibold transition-all transform ${
+                className={`absolute top-2 left-4 text-black font-semibold transition-all transform ${
                   value && "text-xs top-1"
                 }`}
               >
