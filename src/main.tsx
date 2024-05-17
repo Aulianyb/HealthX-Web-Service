@@ -11,6 +11,7 @@ import DataStaffPage from "./pages/AdminPage/DataStaffPage/DataStaffPage";
 import DataRuanganPage from "./pages/AdminPage/DataRuanganPage/DataRuanganPage";
 import DataPasienPage from "./pages/AdminPage/DataPasienPage/DataPasienPage";
 import DataLayananPage from "./pages/AdminPage/DataLayananPage/DataLayananPage";
+import RegistrationPage from "./pages/UserRegistration/UserRegistrationPage";
 import APITesting from "./pages/Testing/APITesting";
 import "./index.css";
 
@@ -24,7 +25,8 @@ ReactDOM.createRoot(rootElement).render(
         <Route path="/" element={<LandingPage />} />
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<PatientRegistrationPage />} />
+        <Route path="/register-user" element={<RegistrationPage />} />
+        <Route path="/register-patient" element={<PatientRegistrationPage />} />
         <Route path="/admin/data-staff" element={<DataStaffPage />} />
         <Route path="/admin/data-ruangan" element={<DataRuanganPage />} />
         <Route path="/admin/data-pasien" element={<DataPasienPage />} />

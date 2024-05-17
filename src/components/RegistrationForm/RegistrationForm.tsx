@@ -1,11 +1,11 @@
 import React, { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import { supabase } from "../../lib/API"; 
+import { supabase } from "../../lib/API";
 import FailedToaster from "../../components/Toaster/FailedToaster";
 import SuccessToaster from "../../components/Toaster/SuccessToaster";
 
-const LoginForm: React.FC = () => {
+const RegistrationForm: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -15,24 +15,24 @@ const LoginForm: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const handleLogin = async (
+  const handleRegister = async (
     event: FormEvent<HTMLFormElement>
   ): Promise<void> => {
     event.preventDefault();
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signUp({
       email: username,
       password,
     });
 
-    console.log(data);
+    console.log(data, error);
 
     if (error) {
       setToastType("failed");
       setToastMessage(error.message);
     } else {
       setToastType("success");
-      setToastMessage("Login successful!");
-      navigate("/admin/data-staff");
+      setToastMessage("Registration successful!");
+      navigate("/login");
     }
     setShowToast(true);
   };
@@ -40,14 +40,12 @@ const LoginForm: React.FC = () => {
   return (
     <div className="bg-white p-8 rounded-[20px] shadow-xl max-w-md mx-auto my-2">
       <span className="text-4xl font-bold text-[#24C48E]">
-        Selamat datang kembali,{" "}
-        <span className="text-4xl italic font-bold text-black">admin.</span>
+        Create an Account
       </span>
       <p className="my-4 text-black">
-        Masukan username dan password untuk{" "}
-        <span className="text-[#313638] font-bold">login</span>
+        Please fill in the information below to create your account.
       </p>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleRegister}>
         <label
           htmlFor="username"
           className="block mb-2 text-sm font-medium text-black"
@@ -88,18 +86,13 @@ const LoginForm: React.FC = () => {
           type="submit"
           className="text-white bg-[#24C48E] hover:bg-[#1db078] focus:ring-4 focus:outline-none focus:ring-[#1db078] font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
         >
-          Login
+          Register
         </button>
       </form>
       <p className="mt-4 text-sm text-center">
-        Don't have an account?{" "}
-        <a href="/register-user" className="text-[#24C48E]">
-          Sign up here
-        </a>
-      </p>
-      <p className="mt-2 text-sm text-center">
-        <a href="/forgot-password" className="text-[#24C48E]">
-          Forgot Password?
+        Already have an account?{" "}
+        <a href="/login" className="text-[#24C48E]">
+          Login here
         </a>
       </p>
       {showToast &&
@@ -112,4 +105,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default RegistrationForm;

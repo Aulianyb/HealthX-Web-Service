@@ -2,162 +2,159 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../../../../HeathX-Web-Service-FE/styles.css";
-import Select, {
-  StylesConfig,
-  ControlProps,
-  SingleValueProps,
-  SingleValue,
-  ActionMeta,
-} from "react-select";
-import { CSSObject } from "@emotion/react";
-
-type OptionType = {
-  value: string;
-  label: string;
-};
+import GenderDropdownButton from "./DropdownButton/GenderDropdownButton";
+import ServiceDropdownButton from "./DropdownButton/ServiceDropdownButton";
+import { supabase } from "../../lib/API";
+import SuccessToaster from "../Toaster/SuccessToaster";
+import FailedToaster from "../Toaster/FailedToaster";
+import WarningToaster from "../Toaster/WarningToaster";
 
 const PatientRegistrationForm = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [gender, setGender] = useState<OptionType | null>(null);
-  const [service, setService] = useState<OptionType | null>(null);
   const [visitDate, setVisitDate] = useState(new Date());
+  const [selectedGender, setSelectedGender] = useState<string>("");
+  const [selectedService, setSelectedService] = useState<string>("");
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [toastType, setToastType] = useState<
+    "success" | "error" | "warning" | null
+  >(null);
 
-  const genderOptions = [
-    { value: "male", label: "Male" },
-    { value: "female", label: "Female" },
-  ];
-
-  const serviceOptions = [
-    { value: "outpatient", label: "Rawat Jalan" },
-    { value: "inpatient", label: "Rawat Inap" },
-    { value: "laboratory", label: "Laboratorium" },
-  ];
-
-  const handleGenderChange = (
-    newValue: SingleValue<OptionType>,
-    actionMeta: ActionMeta<OptionType>
-  ) => {
-    setGender(newValue);
+  // Handle gender selection
+  const handleGenderSelect = (gender: string) => {
+    setSelectedGender(gender);
+    console.log("Selected gender:", gender); // You can perform additional actions here
   };
 
-  const handleServiceChange = (
-    newValue: SingleValue<OptionType>,
-    actionMeta: ActionMeta<OptionType>
-  ) => {
-    setService(newValue);
+  // Handle service selection
+  const handleServiceSelect = (service: string) => {
+    setSelectedService(service);
+    console.log("Selected service:", service); // You can perform additional actions here
   };
 
-  const customStyles: StylesConfig<OptionType, false> = {
-    control: (base: CSSObject, props: ControlProps<OptionType, false>) => ({
-      ...base,
-      backgroundColor: "#ABADB3",
-      color: "#F1F2F5",
-      borderColor: "#ABADB3",
-    }),
-    singleValue: (
-      base: CSSObject,
-      props: SingleValueProps<OptionType, false>
-    ) => ({
-      ...base,
-      color: "#F1F2F5",
-    }),
+  // Handle form submission
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!name || !phone || !selectedGender || !selectedService) {
+      setToastMessage("Please fill out all fields.");
+      setToastType("warning");
+      setTimeout(() => setToastMessage(null), 3000); // Remove toast after 3 seconds
+      return;
+    }
+    // Insert data into the "Patient" table
+    const { data, error } = await supabase.from("Patient").insert([
+      {
+        name: name,
+        gender: selectedGender,
+        telephone: phone,
+        date_of_visit: visitDate,
+        service: selectedService,
+        current_condition: "", // Assigning empty string as it's not provided in the form
+      },
+    ]);
+
+    if (error) {
+      console.error("Error inserting data:", error);
+      setToastMessage("Registration failed!");
+      setToastType("error");
+    } else {
+      console.log("Data inserted successfully:", data);
+      setToastMessage("Registration successful!");
+      setToastType("success");
+      // Reset form fields after successful submission
+      setName("");
+      setPhone("");
+      setVisitDate(new Date());
+      setSelectedGender("");
+      setSelectedService("");
+    }
+    setTimeout(() => setToastMessage(null), 3000); // Remove toast after 3 seconds
   };
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-lg max-w-lg mx-auto my-10">
-      <p className="text-4xl font-bold text-black ">
-        Daftar Layanan{" "}
-        <p className="text-4xl font-bold  text-[#24C48E]">Rumah Sakit</p>
-      </p>
-      <p className="text-gray-600 my-4">
-        Masukan informasi pribadi untuk melakukan pendaftaran
-      </p>
-      <form>
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="name"
-        ></label>
-        <input
-          id="name"
-          type="text"
-          placeholder="Nama"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="shadow appearance-none border rounded-xl w-full bg-[#F1F2F5] text-[#ABADB3] py-4 px-3 mb-1 leading-tight focus:outline-none focus:shadow-outline"
-        />
-
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="phone"
-        ></label>
-        <input
-          id="phone"
-          type="text"
-          placeholder="No Telepon"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          className="rounded-xl shadow appearance-none border  w-full py-4 px-3 bg-[#F1F2F5] text-[#ABADB3] mb-2 leading-tight focus:outline-none focus:shadow-outline"
-        />
-        <div className="flex w-full justify-between">
-          <div className="w-full">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="gender"
-            >
-              Gender
-            </label>
-
-            <Select
-              id="gender"
-              options={genderOptions}
-              value={gender}
-              onChange={handleGenderChange}
-              className="mb-2 bg-[#ABADB3] w-full mr-2 rounded-xl"
-              styles={customStyles}
-            />
-          </div>
-          <div className="w-full">
-            {" "}
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2 ml-2"
-              htmlFor="service"
-            >
-              Service
-            </label>
-            <Select
-              id="service"
-              options={serviceOptions}
-              value={service}
-              onChange={handleServiceChange}
-              className="mb-2 bg-[#ABADB3] w-full ml-2 rounded-xl"
-              styles={customStyles}
-            />
-          </div>
-        </div>
-
-        <label
-          className="block text-gray-700 text-sm font-bold mb-2"
-          htmlFor="visitDate"
-        >
-          Tanggal berkunjung
-        </label>
-        <div className="custom-datepicker">
-          <DatePicker
-            selected={visitDate}
-            onChange={(date: Date) => setVisitDate(date)}
-            dateFormat="MMMM d, yyyy"
-            className="shadow border rounded-xl w-full py-4 px-3 bg-[#F1F2F5] text-[#ABADB3] mb-2 leading-tight focus:outline-none focus:shadow-outline"
+    <div>
+      <div className="max-w-lg p-8 mx-auto mt-8 mb-2 bg-white rounded-lg shadow-lg">
+        <p className="text-4xl font-bold text-black ">
+          Daftar Layanan{" "}
+          <p className="text-4xl font-bold  text-[#24C48E]">Rumah Sakit</p>
+        </p>
+        <p className="my-4 text-gray-600">
+          Masukan informasi pribadi untuk melakukan pendaftaran
+        </p>
+        <form onSubmit={handleSubmit}>
+          <label
+            className="block mb-2 text-sm font-bold text-gray-700"
+            htmlFor="name"
+          >
+            Nama
+          </label>
+          <input
+            id="name"
+            type="text"
+            placeholder="Nama"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="shadow appearance-none border rounded-xl w-full bg-[#F1F2F5] text-[#ABADB3] py-4 px-3 mb-1 leading-tight focus:outline-none focus:shadow-outline"
+            required
           />
-        </div>
 
-        <button
-          type="submit"
-          className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-4 rounded-xl focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
-        >
-          Daftar
-        </button>
-      </form>
+          <label
+            className="block mb-2 text-sm font-bold text-gray-700"
+            htmlFor="phone"
+          >
+            No Telepon
+          </label>
+          <input
+            id="phone"
+            type="text"
+            placeholder="No Telepon"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="rounded-xl shadow appearance-none border  w-full py-4 px-3 bg-[#F1F2F5] text-[#ABADB3] mb-2 leading-tight focus:outline-none focus:shadow-outline"
+            required
+          />
+          <div className="flex justify-center w-full mb-2">
+            {/* Gender Dropdown */}
+            <GenderDropdownButton onSelect={handleGenderSelect} />
+
+            {/* Service Dropdown */}
+            <ServiceDropdownButton onSelect={handleServiceSelect} />
+          </div>
+
+          <label
+            className="block mb-2 text-sm font-bold text-gray-700"
+            htmlFor="visitDate"
+          >
+            Tanggal berkunjung
+          </label>
+          <div className="custom-datepicker">
+            <DatePicker
+              selected={visitDate}
+              onChange={(date: Date) => setVisitDate(date)}
+              dateFormat="MMMM d, yyyy"
+              className="shadow border rounded-xl w-full py-4 px-3 bg-[#F1F2F5] text-[#ABADB3] mb-2 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full px-4 py-4 font-bold text-white transition duration-150 ease-in-out bg-green-500 hover:bg-green-700 rounded-xl focus:outline-none focus:shadow-outline"
+          >
+            Daftar
+          </button>
+        </form>
+      </div>
+      <div className="flex justify-center">
+        {toastMessage &&
+          (toastType === "success" ? (
+            <SuccessToaster message={toastMessage} />
+          ) : toastType === "error" ? (
+            <FailedToaster message={toastMessage} />
+          ) : toastType === "warning" ? (
+            <WarningToaster message={toastMessage} />
+          ) : null)}
+      </div>
     </div>
   );
 };
