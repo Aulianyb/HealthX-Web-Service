@@ -11,7 +11,6 @@ import DataRuanganPage from "./pages/AdminPage/DataRuanganPage/DataRuanganPage";
 import DataPasienPage from "./pages/AdminPage/DataPasienPage/DataPasienPage";
 import DataLayananPage from "./pages/AdminPage/DataLayananPage/DataLayananPage";
 import RegistrationPage from "./pages/UserRegistration/UserRegistrationPage";
-import APITesting from "./pages/Testing/APITesting";
 import ResetPasswordPage from "./pages/ResetPasswordPage/ResetPasswordPage"; // Import the ResetPasswordPage
 import "./index.css";
 
