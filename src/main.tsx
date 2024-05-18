@@ -31,8 +31,8 @@ ReactDOM.createRoot(rootElement).render(
         <Route path="/admin/data-ruangan" element={<DataRuanganPage />} />
         <Route path="/admin/data-pasien" element={<DataPasienPage />} />
         <Route path="/admin/data-layanan" element={<DataLayananPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />{" "}
         {/* Add ResetPasswordPage route */}
+        <Route path="/reset-password" element={<ResetPasswordPage />} />{" "}
         <Route path="/debug" element={<APITesting />} />
       </Routes>
     </Router>

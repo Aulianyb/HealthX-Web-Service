@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { supabase } from "../../../lib/API";
+import LogoutConfirmationModal from "../../AdminComponents/Modals/LogoutConfirmationModals";
 
 const NavBarAdmin = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -13,6 +16,20 @@ const NavBarAdmin = () => {
       navigate("/login");
     }
   };
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleConfirmLogout = () => {
+    handleLogout();
+    handleModalClose();
+  };
+
   return (
     <nav className="bg-[#313638] flex justify-between items-center pt-2 px-12">
       <div className="flex flex-row items-center space-x-4">
@@ -64,12 +81,17 @@ const NavBarAdmin = () => {
       </div>
       <div className="flex items-center">
         <button
-          onClick={handleLogout}
+          onClick={handleModalOpen}
           className="bg-[#24C48E] hover:bg-[#02A26C] text-white font-bold py-2 mb-2 px-4 rounded"
         >
           Logout
         </button>
       </div>
+      <LogoutConfirmationModal
+        isOpen={isModalOpen}
+        onClose={handleModalClose}
+        onConfirm={handleConfirmLogout}
+      />
     </nav>
   );
 };

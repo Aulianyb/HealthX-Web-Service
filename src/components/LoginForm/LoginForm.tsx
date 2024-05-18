@@ -42,7 +42,7 @@ const LoginForm: React.FC = () => {
       const { data, error } = await supabase.auth.resetPasswordForEmail(
         username,
         {
-          redirectTo: "https://example.com/update-password",
+          redirectTo: "http://localhost:5173/reset-password",
         }
       );
 
@@ -63,7 +63,7 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="bg-white p-8 rounded-[20px] shadow-xl max-w-md mx-auto my-20">
+    <div className="bg-white p-8 rounded-[20px] shadow-xl max-w-md mx-auto my-2">
       <span className="text-4xl font-bold text-[#24C48E]">
         Selamat datang kembali,{" "}
         <span className="text-4xl italic font-bold text-black">admin.</span>

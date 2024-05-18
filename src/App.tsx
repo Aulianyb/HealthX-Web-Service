@@ -1,5 +1,5 @@
 // src/App.tsx
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "./lib/API";
 
@@ -7,15 +7,11 @@ const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        if (event === "PASSWORD_RECOVERY") {
-          navigate("/reset-password");
-        }
+    const { data: authListener } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") {
+        navigate("/reset-password");
       }
-    );
-
-    console.log(event);
+    });
 
     return () => {
       authListener.subscription.unsubscribe();
