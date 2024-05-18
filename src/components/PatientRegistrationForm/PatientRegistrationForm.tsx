@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "../../../../HeathX-Web-Service-FE/styles.css";
+import "../../../styles.css";
 import GenderDropdownButton from "./DropdownButton/GenderDropdownButton";
 import ServiceDropdownButton from "./DropdownButton/ServiceDropdownButton";
 import { supabase } from "../../lib/API";
