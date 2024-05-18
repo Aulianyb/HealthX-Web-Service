@@ -1,9 +1,9 @@
 import React, { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import { supabase } from "../../lib/API"; 
-import FailedToaster from "../../components/Toaster/FailedToaster";
-import SuccessToaster from "../../components/Toaster/SuccessToaster";
+import { supabase } from "../../lib/API";
+import FailedToaster from "../Toaster/FailedToaster";
+import SuccessToaster from "../Toaster/SuccessToaster";
 
 const LoginForm: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -35,6 +35,31 @@ const LoginForm: React.FC = () => {
       navigate("/admin/data-staff");
     }
     setShowToast(true);
+  };
+
+  const handleResetPassword = async () => {
+    try {
+      const { data, error } = await supabase.auth.resetPasswordForEmail(
+        username,
+        {
+          redirectTo: "http://localhost:5173/reset-password",
+        }
+      );
+
+      console.log(data, error);
+      if (error) {
+        throw error;
+      } else {
+        setToastType("success");
+        setToastMessage("Password reset email sent!");
+      }
+    } catch (error) {
+      // Specify the type of the error
+      setToastMessage(String(error));
+      setToastType("failed");
+    } finally {
+      setShowToast(true);
+    }
   };
 
   return (
@@ -93,14 +118,14 @@ const LoginForm: React.FC = () => {
       </form>
       <p className="mt-4 text-sm text-center">
         Don't have an account?{" "}
-        <a href="/register-user" className="text-[#24C48E]">
+        <a href="/register" className="text-[#24C48E]">
           Sign up here
         </a>
       </p>
       <p className="mt-2 text-sm text-center">
-        <a href="/forgot-password" className="text-[#24C48E]">
+        <button onClick={handleResetPassword} className="text-[#24C48E]">
           Forgot Password?
-        </a>
+        </button>
       </p>
       {showToast &&
         (toastType === "failed" ? (
