@@ -42,7 +42,7 @@ const LoginForm: React.FC = () => {
       const { data, error } = await supabase.auth.resetPasswordForEmail(
         username,
         {
-          redirectTo: "http://localhost:5173/reset-password",
+          redirectTo: "https://health-x-web-service.vercel.app/reset-password",
         }
       );
 
