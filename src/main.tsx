@@ -33,7 +33,6 @@ ReactDOM.createRoot(rootElement).render(
         <Route path="/admin/data-layanan" element={<DataLayananPage />} />
         {/* Add ResetPasswordPage route */}
         <Route path="/reset-password" element={<ResetPasswordPage />} />{" "}
-        <Route path="/debug" element={<APITesting />} />
       </Routes>
     </Router>
   </React.StrictMode>
