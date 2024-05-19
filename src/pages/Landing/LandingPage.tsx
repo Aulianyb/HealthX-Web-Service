@@ -37,7 +37,7 @@ const LandingPage = () => {
         {/* right side */}
         <div className="w-[45%] ">
           <img
-            src="public\doctor-landing page.svg"
+            src={"doctor-landing page.svg"}
             alt="logo doctor landing page"
             className="w-full object-cover"
           />
