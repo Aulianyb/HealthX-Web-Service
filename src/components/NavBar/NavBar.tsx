@@ -6,7 +6,7 @@ const NavBar = () => {
       <div>
         <Link to="/" className="">
           <img
-            src="../../../public/logo-navbar.svg"
+            src={"logo-navbar.svg"}
             alt="HealthX Logo"
             className="h-8"
           />

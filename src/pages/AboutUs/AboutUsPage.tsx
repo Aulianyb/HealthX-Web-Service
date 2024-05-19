@@ -7,7 +7,7 @@ const AboutUsPage = () => {
       <NavBar></NavBar>
       <div className="bg-[#24C48E] flex justify-center h-[50vh] items-start">
         <img
-          src="../../../public/logo-about us.svg"
+          src={"logo-about us.svg"}
           alt="health-x logo"
           className="w-[30%] mt-8"
         ></img>
