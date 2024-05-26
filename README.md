@@ -40,3 +40,8 @@ Web Service dapat diakses melalui link di bawah ini <br>
 - **Vite** : Framework yang digunakan untuk membangun front-end web service
 - **Supabase** : Database infrastructure untuk membangun back-end web service
 - **Tailwind UI** : Library UI yang digunakan untuk styling
+
+## 👷‍♂️ The Devs
+| <img width="50" src="https://avatars.githubusercontent.com/u/42485997?v=4"/> | <img width="50" src="https://avatars.githubusercontent.com/u/110666720?v=4"/> |
+| :---: | :---: |
+| [Aulia Nadhirah Y. B.](https://github.com/Aulianyb) | [Marvel Subekti](https://github.com/M4RV3LS) |
