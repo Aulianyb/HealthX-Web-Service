@@ -1,3 +1,20 @@
+<p align="center">
+    <picture>
+      <source media="(prefers-color-scheme: dark)"
+          srcset="./public/logo-navbar.svg"
+          width="600"
+          height="200"
+      />
+      <source media="(prefers-color-scheme: light)"
+          srcset="./public/logo-about us.svg"
+          width="600"
+          height="200"
+      />
+      <img id="logo" alt="Unwind logo"
+          src="./assets/unwindLogo-Dark.svg"
+      />
+    </picture>
+</p>
 # HeathX Web Service
 Suatu Web Service yang membantu pasien mendaftarkan diri untuk layanan kesehatan dari mana saja, hanya dengan beberapa klik.
 
