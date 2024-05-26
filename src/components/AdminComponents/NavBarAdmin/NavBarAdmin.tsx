@@ -33,7 +33,11 @@ const NavBarAdmin = () => {
   return (
     <nav className="bg-[#313638] flex justify-between items-center pt-2 px-12">
       <div className="flex flex-row items-center space-x-4">
-        <img src={"logo-navbar.svg"} alt="HealthX Logo" className="h-8 mb-2" />
+        <img
+          src={"logo-navbar.svg"}
+          alt="HealthX Logo"
+          className="h-8 mb-2"
+        />
         <NavLink
           to="/admin/data-staff"
           className={({ isActive }) =>
