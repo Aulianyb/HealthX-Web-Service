@@ -4,6 +4,7 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 import { supabase } from "../../lib/API";
 import FailedToaster from "../Toaster/FailedToaster";
 import SuccessToaster from "../Toaster/SuccessToaster";
+import { Link } from "react-router-dom";
 
 const LoginForm: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -118,9 +119,15 @@ const LoginForm: React.FC = () => {
       </form>
       <p className="mt-4 text-sm text-center">
         Don't have an account?{" "}
-        <a href="/register" className="text-[#24C48E]">
+        <Link
+        to="/register"
+        className="text-[#24C48E]"
+        >
+          Sign up here     
+        </Link>
+        {/* <a href="/register" className="text-[#24C48E]">
           Sign up here
-        </a>
+        </a> */}
       </p>
       <p className="mt-2 text-sm text-center">
         <button onClick={handleResetPassword} className="text-[#24C48E]">
