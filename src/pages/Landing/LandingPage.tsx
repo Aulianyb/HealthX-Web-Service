@@ -21,7 +21,7 @@ const LandingPage = () => {
           </p>
           <div className="flex justify-start gap-x-6">
             <Link
-              to="/register"
+              to="/register-patient"
               className="bg-[#24C48E] hover:bg-[#02A26C] text-white font-bold w-[30%] text-xl py-4 text-center items-center px-4 rounded-lg"
             >
               Daftar Sekarang
